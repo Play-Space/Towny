@@ -345,6 +345,25 @@ public final class FileMgmt {
 			}
 		}
 	}
+	
+	public static void zipFile(String path, String file) throws IOException {
+		synchronized (mutex) {
+			ZipOutputStream output = new ZipOutputStream(new FileOutputStream(path), StandardCharsets.UTF_8);
+			byte[] readBuffer = new byte[2156];
+			int bytesIn;
+			File f = new File(file);
+			if (f.isFile() && f.canRead()) {
+				FileInputStream input = new FileInputStream(f);
+				ZipEntry anEntry = new ZipEntry(f.getName());
+				output.putNextEntry(anEntry);
+				while ((bytesIn = input.read(readBuffer)) != -1)
+					output.write(readBuffer, 0, bytesIn);
+				input.close();
+			}
+			output.close();
+		}
+	}
+	
 
 	public static void zipDirectories(File destination, File... sourceFolders) throws IOException {
 

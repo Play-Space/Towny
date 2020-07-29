@@ -2261,6 +2261,12 @@ public final class TownyFlatFileSource extends TownyDatabaseHandler {
             e.printStackTrace();
             return false;
         }
+        try {
+			FileMgmt.zipFile(getPlotFilename(plotChunk).replace(".data", ".zip"), getPlotFilename(plotChunk));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        deleteFile(getPlotFilename(plotChunk));        
 		return true;
 
 	}

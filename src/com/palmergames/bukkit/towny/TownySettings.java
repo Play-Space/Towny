@@ -1594,7 +1594,7 @@ public class TownySettings {
 
 	public static boolean isTaxingDaily() {
 
-		return getBoolean(ConfigNodes.ECO_DAILY_TAXES_ENABLED);
+		return getBoolean(ConfigNodes.PLUGIN_USING_ECONOMY) && getBoolean(ConfigNodes.ECO_DAILY_TAXES_ENABLED);
 	}
 
 	public static double getMaxPlotTax() {
