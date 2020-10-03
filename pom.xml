@@ -66,6 +66,10 @@
             <url>https://ci.ender.zone/plugin/repository/everything/</url>
         </repository>
         <repository>
+            <id>dmulloy2-repo</id>
+            <url>https://repo.dmulloy2.net/nexus/repository/public/</url>
+        </repository>
+        <repository>
             <id>groupmanager-repo</id>
             <url>https://raw.githubusercontent.com/GroupManager/GroupManager/maven/</url>
             <!-- Not browsable from this URL (HTTP 400) - Works fine as Repo, though. For Ver. # - see https://github.com/GroupManager/GroupManager/ -->
@@ -81,6 +85,11 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>com.comphenix.protocol</groupId>
+            <artifactId>ProtocolLib</artifactId>
+            <version>4.5.0</version>
+        </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>

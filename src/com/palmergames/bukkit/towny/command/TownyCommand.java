@@ -11,6 +11,7 @@ import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
+import com.palmergames.bukkit.towny.gui.MainGUI;
 import com.palmergames.bukkit.towny.object.economy.Account;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -104,7 +105,6 @@ public class TownyCommand extends BaseCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-
 		towny_version = Colors.Green + "Towny version: " + Colors.LightGreen + plugin.getVersion();
 
 		towny_war.add(ChatTools.formatTitle("/towny war"));

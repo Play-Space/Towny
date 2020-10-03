@@ -18,6 +18,8 @@ import com.palmergames.bukkit.towny.command.commandobjects.ConfirmCommand;
 import com.palmergames.bukkit.towny.command.commandobjects.DenyCommand;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
+import com.palmergames.bukkit.towny.gui.interpreter.TownCreator;
+import com.palmergames.bukkit.towny.gui.listeners.ClickGUI;
 import com.palmergames.bukkit.towny.huds.HUDManager;
 import com.palmergames.bukkit.towny.invites.InviteHandler;
 import com.palmergames.bukkit.towny.listeners.TownyBlockListener;
@@ -46,6 +48,7 @@ import com.palmergames.bukkit.towny.war.flagwar.listeners.FlagWarBlockListener;
 import com.palmergames.bukkit.towny.war.flagwar.listeners.FlagWarCustomListener;
 import com.palmergames.bukkit.towny.war.flagwar.listeners.FlagWarEntityListener;
 import com.palmergames.bukkit.util.BukkitTools;
+import com.palmergames.bukkit.util.SignMenuFactory;
 import com.palmergames.bukkit.util.Version;
 import com.palmergames.util.JavaUtil;
 import com.palmergames.util.StringMgmt;
@@ -120,10 +123,12 @@ public class Towny extends JavaPlugin {
 		
 		plugin = this;
 	}
-
+	public static SignMenuFactory getSignMenuFactory() {
+		return signMenuFactory;
+	}
 	@Override
 	public void onEnable() {
-
+		signMenuFactory = new SignMenuFactory(this);
 		System.out.println("====================      Towny      ========================");
 		System.out.println("====================      Play-Space fork      ========================");
 		townyUniverse = TownyUniverse.getInstance();
@@ -442,9 +447,10 @@ public class Towny extends JavaPlugin {
 		pluginManager.registerEvents(playerListener, this);
 		pluginManager.registerEvents(blockListener, this);
 		pluginManager.registerEvents(entityListener, this);
-
+        pluginManager.registerEvents(new ClickGUI(), this);
+		pluginManager.registerEvents(new TownCreator(), this);
 	}
-
+	private static SignMenuFactory signMenuFactory;
 	private void printChangelogToConsole() {
 
 		try {

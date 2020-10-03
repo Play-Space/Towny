@@ -24,6 +24,7 @@ import com.palmergames.bukkit.towny.exceptions.AlreadyRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
+import com.palmergames.bukkit.towny.gui.MainGUI;
 import com.palmergames.bukkit.towny.invites.Invite;
 import com.palmergames.bukkit.towny.invites.InviteHandler;
 import com.palmergames.bukkit.towny.invites.InviteReceiver;
@@ -369,9 +370,7 @@ public class TownCommand extends BaseCommand implements CommandExecutor, TabComp
 				sender.sendMessage(Colors.Rose + "[Towny Error] Locked in Safe mode!");
 				return false;
 			}
-				
-			Player player = (Player) sender;
-			parseTownCommand(player, args);
+			// parseTownCommand(player, args);
 		} else
 			try {
 				parseTownCommandForConsole(sender, args);
@@ -417,7 +416,8 @@ public class TownCommand extends BaseCommand implements CommandExecutor, TabComp
 						TownyMessaging.sendMessage(player, TownyFormatter.getStatus(town));
 					} catch (NotRegisteredException x) {
 						try {
-							throw new TownyException(Translation.of("msg_err_dont_belong_town"));
+							MainGUI.hook(player, MainGUI.GUIStates.NO_TOWN);
+							throw new TownyException("Não faz parte da cidade");
 						} catch (TownyException e) {
 							TownyMessaging.sendErrorMsg(player, e.getMessage()); // Exceptions written from this runnable, are not reached by the catch at the end.
 						}
